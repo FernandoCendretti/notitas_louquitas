@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 
+  name: 
+  paraent_id: 
+  user_id: 
+
+two:
+  id: 
+  name: 
+  paraent_id: 
+  user_id: 

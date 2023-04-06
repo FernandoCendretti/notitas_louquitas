@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 
+  content: 
+  title: MyString
+  string,: MyString
+  folder_id: 
+
+two:
+  id: 
+  content: 
+  title: MyString
+  string,: MyString
+  folder_id: 

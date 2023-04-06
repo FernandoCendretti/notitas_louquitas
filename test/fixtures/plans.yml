@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  value: 
+  limit_folder: MyString
+  string,: MyString
+  limit_notes: MyString
+
+two:
+  type: 
+  value: 
+  limit_folder: MyString
+  string,: MyString
+  limit_notes: MyString
