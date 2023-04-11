@@ -25,7 +25,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 
-group :development do
+group :test, :development do
+  gem 'fabrication', '~> 2.15', '>= 2.15.2'
+  gem 'minitest', '5.15.0'
+  gem 'minitest-reporters', '1.0.0'
   gem 'rubocop', '0.48.1', require: false
   gem 'spring'
 end
@@ -42,3 +45,4 @@ gem 'bcrypt', '~> 3.1.7'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 gem 'activeuuid', '0.6.1'
+gem 'rabl', '~> 0.12.0'
