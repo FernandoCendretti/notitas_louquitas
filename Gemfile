@@ -31,6 +31,9 @@ group :test, :development do
   gem 'minitest-reporters', '1.0.0'
   gem 'rubocop', '0.48.1', require: false
   gem 'spring'
+  gem 'pry', '0.10.4'
+  gem 'pry-byebug', '3.4.2'
+  gem 'pry-rails', '0.3.6'
 end
 
 # Use ActiveModel has_secure_password
