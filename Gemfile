@@ -34,6 +34,7 @@ group :test, :development do
   gem 'pry', '0.10.4'
   gem 'pry-byebug', '3.4.2'
   gem 'pry-rails', '0.3.6'
+  gem 'database_cleaner', '~> 1.5', '>= 1.5.3'
 end
 
 # Use ActiveModel has_secure_password

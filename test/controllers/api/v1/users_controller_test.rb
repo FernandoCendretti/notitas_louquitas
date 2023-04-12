@@ -3,6 +3,11 @@ class Api::V1::UsersControllerTest < ActionController::TestCase
   def setup
     @user = Fabricate(:user)
     @plan = Fabricate(:plan)
+    DatabaseCleaner.start
+  end
+
+  def teardown
+    DatabaseCleaner.clean
   end
 
   test 'should be able to create a new user' do
