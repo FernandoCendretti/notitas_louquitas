@@ -73,4 +73,17 @@ class Api::V1::UsersControllerTest < ActionController::TestCase
     @json = JSON.parse(response.body)
     assert_equal @json['errors'], "Email must be a valid email address"
   end
+  test 'should be able to return a error if user already exists' do
+    body = {
+      name: 'John',
+      email: 'doe@email.com',
+      password: '123',
+      password_confirmation: '123',
+      plan_id: 1
+    }
+    post :create, body
+    assert_response :bad_request
+    @json = JSON.parse(response.body)
+    assert_equal @json['errors'], 'This User already exists'
+  end
 end
