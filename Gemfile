@@ -35,6 +35,7 @@ group :test, :development do
   gem 'pry-byebug', '3.4.2'
   gem 'pry-rails', '0.3.6'
   gem 'database_cleaner', '~> 1.5', '>= 1.5.3'
+  gem 'dotenv-rails', '~> 2.1', '>= 2.1.1'
 end
 
 # Use ActiveModel has_secure_password
@@ -50,3 +51,4 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'debugger', group: [:development, :test]
 gem 'activeuuid', '0.6.1'
 gem 'rabl', '~> 0.12.0'
+gem 'jwt', '~> 1.5', '>= 1.5.4'
