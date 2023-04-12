@@ -10,7 +10,8 @@ class Api::V1::UsersControllerTest < ActionController::TestCase
       name: 'Fernando',
       email: 'fernando@email.com',
       password: '123',
-      password_confirmation: '123'
+      password_confirmation: '123',
+      plan_id: 1
     }
     post :create, body
     assert_response :success
@@ -24,11 +25,47 @@ class Api::V1::UsersControllerTest < ActionController::TestCase
     body = {
       email: 'fernando@email.com',
       password: '123',
-      password_confirmation: '123'
+      password_confirmation: '123',
+      plan_id: 1
     }
     post :create, body
     assert_response :bad_request
     @json = JSON.parse(response.body)
     assert_equal @json['errors'], "Name can't be blank"
+  end
+  test 'should be able to return a error if email is empty' do
+    body = {
+      name: 'Fernando',
+      password: '123',
+      password_confirmation: '123'
+    }
+    post :create, body
+    assert_response :bad_request
+    @json = JSON.parse(response.body)
+    assert_equal @json['errors'], "Email can't be blank and Email must be a valid email address"
+  end
+  test 'should be able to return a error if password is empty' do
+    body = {
+      name: 'Fernando',
+      email: 'fernando@email.com',
+      plan_id: 1
+    }
+    post :create, body
+    assert_response :bad_request
+    @json = JSON.parse(response.body)
+    assert_equal @json['errors'], "Password can't be blank"
+  end
+  test 'should be able to return a error if email is a invalid email' do
+    body = {
+      name: 'Fernando',
+      email: 'fernando',
+      password: '123',
+      password_confirmation: '123',
+      plan_id: 1
+    }
+    post :create, body
+    assert_response :bad_request
+    @json = JSON.parse(response.body)
+    assert_equal @json['errors'], "Email must be a valid email address"
   end
 end
