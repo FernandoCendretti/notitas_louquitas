@@ -16,13 +16,15 @@ class Api::V1::UsersControllerTest < ActionController::TestCase
       email: 'fernando@email.com',
       password: '123',
       password_confirmation: '123',
-      plan_id: 1
+      plan_name: 'Basic'
     }
     post :create, body
     assert_response :success
     @json = JSON.parse(response.body)
+    binding.pry
     assert_equal @json['name'], 'Fernando'
     assert_equal @json['email'], 'fernando@email.com'
+    assert_not_empty @json['plan']['name'] = Basic
     assert_not_empty @json['id']
   end
 
@@ -31,7 +33,7 @@ class Api::V1::UsersControllerTest < ActionController::TestCase
       email: 'fernando@email.com',
       password: '123',
       password_confirmation: '123',
-      plan_id: 1
+      plan_name: 'Basic'
     }
     post :create, body
     assert_response :bad_request
@@ -53,7 +55,7 @@ class Api::V1::UsersControllerTest < ActionController::TestCase
     body = {
       name: 'Fernando',
       email: 'fernando@email.com',
-      plan_id: 1
+      plan_name: 'Basic'
     }
     post :create, body
     assert_response :bad_request
@@ -66,7 +68,7 @@ class Api::V1::UsersControllerTest < ActionController::TestCase
       email: 'fernando',
       password: '123',
       password_confirmation: '123',
-      plan_id: 1
+      plan_name: 'Basic'
     }
     post :create, body
     assert_response :bad_request
@@ -79,7 +81,7 @@ class Api::V1::UsersControllerTest < ActionController::TestCase
       email: 'doe@email.com',
       password: '123',
       password_confirmation: '123',
-      plan_id: 1
+      plan_name: 'Basic'
     }
     post :create, body
     assert_response :bad_request

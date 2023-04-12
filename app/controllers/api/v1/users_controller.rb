@@ -4,6 +4,7 @@ class Api::V1::UsersController < Api::V1::BaseApiController
 
   def create
     @user = User.new(user_params)
+    @user.plan = Plan.find_by(name: params[:plan_name])
     unless @user.save
       return bad_request(@user.errors.full_messages.to_sentence)
     end
@@ -12,7 +13,7 @@ class Api::V1::UsersController < Api::V1::BaseApiController
 
   private
     def user_params
-      params.permit(:name, :email, :password, :passwor_confirmation)
+      params.permit(:name, :email, :password, :password_confirmation)
     end
     def validate_if_user_exist
       if User.find_by(email: params[:email])
