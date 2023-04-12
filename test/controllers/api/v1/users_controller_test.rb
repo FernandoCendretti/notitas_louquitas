@@ -21,11 +21,24 @@ class Api::V1::UsersControllerTest < ActionController::TestCase
     post :create, body
     assert_response :success
     @json = JSON.parse(response.body)
-    binding.pry
     assert_equal @json['name'], 'Fernando'
     assert_equal @json['email'], 'fernando@email.com'
-    assert_not_empty @json['plan']['name'] = Basic
+    assert_equal @json['plan']['name'], 'Basic'
     assert_not_empty @json['id']
+  end
+
+  test 'should be able to return a error if plan does not exists' do
+    body = {
+      name: 'Fernando',
+      email: 'fernando@email.com',
+      password: '123',
+      password_confirmation: '123',
+      plan_name: 'Teste'
+    }
+    post :create, body
+    assert_response :bad_request
+    @json = JSON.parse(response.body)
+    assert_equal @json['errors'], 'This plan does not exists'
   end
 
   test 'should be able to return a error if name is empty' do
@@ -44,7 +57,8 @@ class Api::V1::UsersControllerTest < ActionController::TestCase
     body = {
       name: 'Fernando',
       password: '123',
-      password_confirmation: '123'
+      password_confirmation: '123',
+      plan_name: 'Basic'
     }
     post :create, body
     assert_response :bad_request

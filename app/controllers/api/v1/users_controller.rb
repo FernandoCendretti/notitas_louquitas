@@ -1,10 +1,11 @@
 class Api::V1::UsersController < Api::V1::BaseApiController
   skip_before_filter :verify_authenticity_token
   before_filter :validate_if_user_exist, only: :create
+  before_filter :validate_if_plan_exist, only: :create
 
   def create
     @user = User.new(user_params)
-    @user.plan = Plan.find_by(name: params[:plan_name])
+    @user.plan = @plan
     unless @user.save
       return bad_request(@user.errors.full_messages.to_sentence)
     end
@@ -18,6 +19,12 @@ class Api::V1::UsersController < Api::V1::BaseApiController
     def validate_if_user_exist
       if User.find_by(email: params[:email])
         return bad_request('This User already exists')
+      end
+    end
+    def validate_if_plan_exist
+      @plan = Plan.find_by(name: params[:plan_name])
+      if @plan.nil?
+        return bad_request('This plan does not exists')
       end
     end
 end
