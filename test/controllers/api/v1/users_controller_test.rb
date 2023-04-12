@@ -19,4 +19,16 @@ class Api::V1::UsersControllerTest < ActionController::TestCase
     assert_equal @json['email'], 'fernando@email.com'
     assert_not_empty @json['id']
   end
+
+  test 'should be able to return a error if name is empty' do
+    body = {
+      email: 'fernando@email.com',
+      password: '123',
+      password_confirmation: '123'
+    }
+    post :create, body
+    assert_response :bad_request
+    @json = JSON.parse(response.body)
+    assert_equal @json['errors'], "Name can't be blank"
+  end
 end
