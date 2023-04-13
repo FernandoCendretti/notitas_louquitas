@@ -32,7 +32,7 @@ class Api::V1::SessionsControllerTest < ActionController::TestCase
   end
   test 'should be able to return a error if user using a wrong password' do
     body = {
-      email: 'fernando@email.com',
+      email: 'doe@email.com',
       password: '1234'
     }
     post :create, body
