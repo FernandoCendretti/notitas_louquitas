@@ -20,4 +20,24 @@ class Api::V1::SessionsControllerTest < ActionController::TestCase
     @json = JSON.parse(response.body)
     assert_not_nil @json['token']
   end
+  test 'should be able to return a error if user does not exists' do
+    body = {
+      email: 'fernando@email.com',
+      password: '123'
+    }
+    post :create, body
+    assert_response :bad_request
+    @json = JSON.parse(response.body)
+    assert_equal @json['errors'], 'Using a wrong password/email'
+  end
+  test 'should be able to return a error if user using a wrong password' do
+    body = {
+      email: 'fernando@email.com',
+      password: '1234'
+    }
+    post :create, body
+    assert_response :bad_request
+    @json = JSON.parse(response.body)
+    assert_equal @json['errors'], 'Using a wrong password/email'
+  end
 end
