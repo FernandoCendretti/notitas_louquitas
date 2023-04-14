@@ -1,4 +1,5 @@
 class Api::V1::UsersController < Api::V1::BaseApiController
+  before_action :authenticate, except: [:create]
   skip_before_filter :verify_authenticity_token
   before_filter :validate_if_user_exist, only: :create
   before_filter :validate_if_plan_exist, only: :create
@@ -9,6 +10,11 @@ class Api::V1::UsersController < Api::V1::BaseApiController
     unless @user.save
       return bad_request(@user.errors.full_messages.to_sentence)
     end
+    render 'users/show'
+  end
+
+  def show
+    @user = User.find(@current_user_id)
     render 'users/show'
   end
 

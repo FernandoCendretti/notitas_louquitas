@@ -3,4 +3,22 @@ class Api::V1::BaseApiController < ApplicationController
     @errors = errors
     render 'errors/400', status: :bad_request
   end
+
+  def unauthorized(errors)
+    @errors = errors
+    render 'errors/401', status: :unauthorized
+  end
+
+  def authenticate
+    header = request.headers['Authorization']
+    token = header.split(' ').last if header
+    begin
+      decoded_token = JWT.decode(token, ENV['JWT_SECRET'], true, algoritm: 'HS256')
+      @current_user_id = decoded_token[0]['user_id']
+    rescue ActiveRecord::RecordNotFound
+      return unauthorized('User is not logged')
+    rescue JWT::DecodeError
+      return unauthorized('User is not logged')
+    end
+  end
 end
