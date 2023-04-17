@@ -14,7 +14,7 @@ class Api::V1::BaseApiController < ApplicationController
     token = header.split(' ').last if header
     begin
       decoded_token = JWT.decode(token, ENV['JWT_SECRET'], true, algoritm: 'HS256')
-      @current_user_id = decoded_token[0]['user_id']
+      @current_user_email = decoded_token[0]['user_email']
     rescue ActiveRecord::RecordNotFound
       return unauthorized('User is not logged')
     rescue JWT::DecodeError
