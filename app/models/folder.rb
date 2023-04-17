@@ -6,4 +6,5 @@ class Folder < ActiveRecord::Base
   has_many :note
   has_many :taggings, as: :resource
   has_many :tags, through: :taggings
+  validates :name, presence: :true
 end

@@ -21,4 +21,11 @@ class Api::V1::BaseApiController < ApplicationController
       return unauthorized('User is not logged')
     end
   end
+
+  def get_user_by_email
+    @user = User.includes(:plan).find_by(email: @current_user_email)
+    if @user.nil?
+      return bad_request('This user does not exists')
+    end
+  end
 end
