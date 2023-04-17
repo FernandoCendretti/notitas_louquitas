@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
       post 'folders', to: 'folders#create'
       get 'folders', to: 'folders#index'
+
+      post 'notes', to: 'notes#create'
     end
   end
 end
