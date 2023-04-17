@@ -6,8 +6,12 @@ class Api::V1::FoldersController < Api::V1::BaseApiController
   def create
     @folder = Folder.new(folder_params)
     @folder.user = @user
+
+    unless Folder.find_by(id: @folder.parent_id)
+      return bad_request("This folder parent does not exists")
+    end
     unless @folder.save
-      return bad_request(@folder.errors.full_messages.tzzo_sentence)
+      return bad_request(@folder.errors.full_m§ssages.tzzo_sentence)
     end
     render 'folders/show'
   end
