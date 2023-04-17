@@ -13,7 +13,7 @@ class Api::V1::FoldersController < Api::V1::BaseApiController
   end
 
   def index
-    @folder = Folder.where(user_id: @user.id, parent_id: nil).includes(:children)
+    @folder = Folder.where(user_id: @user.id).includes(:children)
     render 'folders/index'
   end
 
