@@ -10,8 +10,10 @@ class Api::V1::SessionsController < Api::V1::BaseApiController
   private 
     def validate_user
       @user = User.find_by_email(params[:email])
-      unless @user && @user.authenticate(params[:password])
-        return bad_request("Using a wrong password/email")
-      end
+      return bad_request("Using a wrong password/email") unless is_user_authenticated 
+    end
+
+    def is_user_authenticated
+      @user && @user.authenticate(params[:password])
     end
 end

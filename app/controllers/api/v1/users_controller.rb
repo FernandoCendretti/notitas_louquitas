@@ -7,7 +7,7 @@ class Api::V1::UsersController < Api::V1::BaseApiController
 
   def create
     @user = User.new(user_params)
-    @user.plan = @plan
+    @user.user_plans.build(plan: @plan)
     unless @user.save
       return bad_request(@user.errors.full_messages.to_sentence)
     end
