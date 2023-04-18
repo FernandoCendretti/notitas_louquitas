@@ -5,8 +5,7 @@ class Api::V1::FoldersController < Api::V1::BaseApiController
   skip_before_filter :verify_authenticity_token
 
   def create
-    @folder = Folder.new(folder_params)
-    @folder.user = @user
+    @folder = @user.folders.new(folder_params)
 
     return bad_request("This folder parent does not exists") if is_valid_parent_id
 
