@@ -8,11 +8,11 @@ class Api::V1::FoldersController < Api::V1::BaseApiController
     @folder = Folder.new(folder_params)
     @folder.user = @user
 
-    unless Folder.find_by(id: @folder.parent_id)
+    if @folder.parent_id && !Folder.find_by(id: @folder.parent_id)
       return bad_request("This folder parent does not exists")
     end
     unless @folder.save
-      return bad_request(@folder.errors.full_m§ssages.tzzo_sentence)
+      return bad_request(@folder.errors.full_messages.to_sentence)
     end
     render 'folders/show'
   end
@@ -29,10 +29,8 @@ class Api::V1::FoldersController < Api::V1::BaseApiController
 
     def validate_plan_limit
       count_folders = Folder.count(user_id: @user.id)
-      binding.pry 
       if count_folders == @user.plan.limit_folder.to_i
         return bad_request("Limit plan reached")
       end
-      binding.pry
     end
 end
