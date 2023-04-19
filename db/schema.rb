@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20230418171555) do
+ActiveRecord::Schema.define(version: 20230418192221) do
 
 # Could not dump table "folders" because of following StandardError
 #   Unknown type 'binary(16)' for column 'id'
@@ -21,6 +21,9 @@ ActiveRecord::Schema.define(version: 20230418171555) do
 
 # Could not dump table "plans" because of following StandardError
 #   Unknown type 'binary(16)' for column 'id'
+
+# Could not dump table "subscriptions" because of following StandardError
+#   Unknown type 'binary(16)' for column 'user_id'
 
 # Could not dump table "taggings" because of following StandardError
 #   Unknown type 'binary(16)' for column 'resource_id'

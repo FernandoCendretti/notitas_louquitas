@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
   include ActiveUUID::UUID
   has_secure_password
-  has_many :user_plans
-  has_many :plans, through: :user_plans
+
+  has_one :subscription
+  has_one :plan, through: :subscription
   has_many :folders
 
   validates :name, presence: :true
