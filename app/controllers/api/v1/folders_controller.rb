@@ -15,7 +15,7 @@ class Api::V1::FoldersController < Api::V1::BaseApiController
   end
 
   def index
-    @folder = @user.folders.includes(:childrens)
+    @folders = @user.folders
     render 'folders/index'
   end
 
@@ -33,6 +33,6 @@ class Api::V1::FoldersController < Api::V1::BaseApiController
     end
 
     def is_count_folder_grather_than_limit_folder?
-      @user.folders.count() >= @user.plans[0].limit_folder.to_i
+      @user.folders.count() >= @user.plan.limit_folder.to_i
     end
 end

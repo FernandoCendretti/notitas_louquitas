@@ -31,9 +31,6 @@ ActiveRecord::Schema.define(version: 20230418192221) do
 # Could not dump table "tags" because of following StandardError
 #   Unknown type 'binary(16)' for column 'id'
 
-# Could not dump table "user_plans" because of following StandardError
-#   Unknown type 'binary(16)' for column 'user_id'
-
 # Could not dump table "users" because of following StandardError
 #   Unknown type 'binary(16)' for column 'id'
 
