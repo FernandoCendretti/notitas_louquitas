@@ -10,6 +10,8 @@ Rails.application.routes.draw do
       get 'folders', to: 'folders#index'
 
       post 'notes', to: 'notes#create'
+
+      post 'tags', to: 'tags#create'
     end
   end
 end
