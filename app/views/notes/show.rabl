@@ -1,6 +1,6 @@
 object @note
 
-attributes :id, :name, :content, :folder_id
+attributes :id, :title, :content, :folder_id
 
 node(:tags) do |note|
   note.tags.map { |tag| 

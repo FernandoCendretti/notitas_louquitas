@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       patch 'folders/:id', to: 'folders#update'
 
       post 'notes', to: 'notes#create'
+      put 'notes', to: 'notes#update'
       get 'notes/:id', to: 'notes#show'
 
       post 'tags', to: 'tags#create'
