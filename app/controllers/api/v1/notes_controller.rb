@@ -4,14 +4,16 @@ class Api::V1::NotesController < Api::V1::BaseApiController
 
   def create
     @note = Note.new(notes_params)
-    unless @note.save
-      return bad_request(@note.errors.full_messages.to_sentence)
-    end
+    return bad_request('This folder does not exists') if folder_does_not_exists
+    return bad_request(@note.errors.full_messages.to_sentence) unless @note.save
     render 'notes/show'
   end
 
   private
     def notes_params
       params.permit(:content, :title, :folder_id)
+    end
+    def folder_does_not_exists
+      Folder.find_by(id: @note.folder_id).nil?
     end
 end
