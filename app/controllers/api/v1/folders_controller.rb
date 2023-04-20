@@ -1,6 +1,7 @@
 class Api::V1::FoldersController < Api::V1::BaseApiController
   before_action :authenticate
   before_filter :get_user_by_email
+  before_filter :get_folder_by_id, only: [:update, :show]
   before_filter :validate_plan_limit, only: :create
   skip_before_filter :verify_authenticity_token
 
@@ -20,8 +21,12 @@ class Api::V1::FoldersController < Api::V1::BaseApiController
   end
 
   def show
-    @folder = @user.folders.find_by(id: params[:id])
-    return bad_request('This folder does not exists') if @folder.nil?
+    render 'folders/show'
+  end
+
+  def update
+    @folder.name = params[:name]
+    return bad_request(@folder.errors.full_messages.to_sentence) unless @folder.save
     render 'folders/show'
   end
 
@@ -40,5 +45,10 @@ class Api::V1::FoldersController < Api::V1::BaseApiController
 
     def is_count_folder_grather_than_limit_folder?
       @user.folders.count() >= @user.plan.limit_folder.to_i
+    end
+
+    def get_folder_by_id
+      @folder = @user.folders.find_by(id: params[:id])
+      return bad_request('This folder does not exists') if @folder.nil?
     end
 end

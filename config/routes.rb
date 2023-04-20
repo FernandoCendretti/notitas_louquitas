@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       post 'folders', to: 'folders#create'
       get 'folders', to: 'folders#index'
       get 'folders/:id', to: 'folders#show'
+      patch 'folders/:id', to: 'folders#update'
 
       post 'notes', to: 'notes#create'
       get 'notes/:id', to: 'notes#show'
