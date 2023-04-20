@@ -16,7 +16,19 @@ node(:childrens) do |folder|
             { 
               id: note.id, 
               title: note.title, 
-              content: note.content 
+              content: note.content,
+              tags: note.tags.map { |tag|
+                { 
+                  id: tag.id, 
+                  name: tag.name
+                }
+              }
+            } 
+          },
+          tags: subchild.tags.map { |tag| 
+            { 
+              id: tag.id, 
+              name: tag.name, 
             } 
           }
         } 
@@ -25,7 +37,19 @@ node(:childrens) do |folder|
         { 
           id: note.id, 
           title: note.title, 
-          content: note.content 
+          content: note.content,
+          tags: note.tags.map { |tag|
+            { 
+              id: tag.id, 
+              name: tag.name
+            }
+          }
+        } 
+      },
+      tags: child.tags.map { |tag| 
+        { 
+          id: tag.id, 
+          name: tag.name
         } 
       }
     } 
@@ -36,7 +60,21 @@ node(:notes) do |folder|
     { 
       id: note.id, 
       title: note.title, 
-      content: note.content 
+      content: note.content,
+      tags: note.tags.map { |tag|
+        { 
+          id: tag.id, 
+          name: tag.name
+        }
+      }
+    }
+  }
+end
+node(:tags) do |folder|
+  folder.tags.map { |tag| 
+    { 
+      id: tag.id, 
+      name: tag.name, 
     } 
   }
 end
