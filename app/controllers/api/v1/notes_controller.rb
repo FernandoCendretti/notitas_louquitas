@@ -9,6 +9,14 @@ class Api::V1::NotesController < Api::V1::BaseApiController
     render 'notes/show'
   end
 
+  def show
+    @note = Note.find_by(id: params[:id])
+
+    return bad_request('This note does not exists') if @note.nil?
+
+    render 'notes/show'
+  end
+
   private
     def notes_params
       params.permit(:content, :title, :folder_id)

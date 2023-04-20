@@ -3,4 +3,6 @@ class Note < ActiveRecord::Base
   belongs_to :folder
   has_many :taggings, as: :resource
   has_many :tags, through: :taggings
+  validates :title, presence: :true
+  validates :content, presence: :true
 end

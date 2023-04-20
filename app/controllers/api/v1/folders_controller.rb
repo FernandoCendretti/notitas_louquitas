@@ -19,6 +19,12 @@ class Api::V1::FoldersController < Api::V1::BaseApiController
     render 'folders/index'
   end
 
+  def show
+    @folder = @user.folders.find_by(id: params[:id])
+    return bad_request('This folder does not exists') if @folder.nil?
+    render 'folders/show'
+  end
+
   private
     def folder_params
       params.permit(:name, :parent_id)
